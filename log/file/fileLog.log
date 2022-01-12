@@ -1,0 +1,33 @@
+2022-01-07 01:50:16,374 INFO (StartupInfoLogger.java:55)- Starting YebServerApplication on weiyideMacBook-Pro.local with PID 8524 (/Users/weiyi/ProjectsDir/IdeaProjects/veb/yeb-server/target/classes started by weiyi in /Users/weiyi/ProjectsDir/IdeaProjects/veb)
+2022-01-07 01:50:16,377 INFO (SpringApplication.java:651)- No active profile set, falling back to default profiles: default
+2022-01-07 01:50:17,740 INFO (RepositoryConfigurationDelegate.java:249)- Multiple Spring Data modules found, entering strict repository configuration mode!
+2022-01-07 01:50:17,743 INFO (RepositoryConfigurationDelegate.java:127)- Bootstrapping Spring Data Redis repositories in DEFAULT mode.
+2022-01-07 01:50:17,828 INFO (RepositoryConfigurationDelegate.java:187)- Finished Spring Data repository scanning in 62ms. Found 0 Redis repository interfaces.
+2022-01-07 01:50:18,480 INFO (TomcatWebServer.java:108)- Tomcat initialized with port(s): 8081 (http)
+2022-01-07 01:50:18,486 INFO (DirectJDKLog.java:173)- Initializing ProtocolHandler ["http-nio-8081"]
+2022-01-07 01:50:18,488 INFO (DirectJDKLog.java:173)- Starting service [Tomcat]
+2022-01-07 01:50:18,489 INFO (DirectJDKLog.java:173)- Starting Servlet engine: [Apache Tomcat/9.0.35]
+2022-01-07 01:50:18,568 INFO (DirectJDKLog.java:173)- Initializing Spring embedded WebApplicationContext
+2022-01-07 01:50:18,569 INFO (ServletWebServerApplicationContext.java:284)- Root WebApplicationContext: initialization completed in 2131 ms
+2022-01-07 01:50:19,432 WARN (TableInfoHelper.java:296)- Warn: Could not find @TableId in Class: com.hust.server.pojo.MailLog.
+2022-01-07 01:50:20,829 INFO (PropertySourcedRequestMappingHandlerMapping.java:69)- Mapped URL path [/v2/api-docs] onto method [springfox.documentation.swagger2.web.Swagger2Controller#getDocumentation(String, HttpServletRequest)]
+2022-01-07 01:50:20,949 INFO (ExecutorConfigurationSupport.java:181)- Initializing ExecutorService 'applicationTaskExecutor'
+2022-01-07 01:50:21,493 INFO (DefaultSecurityFilterChain.java:43)- Creating filter chain: Ant [pattern='/login'], []
+2022-01-07 01:50:21,494 INFO (DefaultSecurityFilterChain.java:43)- Creating filter chain: Ant [pattern='/logout'], []
+2022-01-07 01:50:21,494 INFO (DefaultSecurityFilterChain.java:43)- Creating filter chain: Ant [pattern='/css/**'], []
+2022-01-07 01:50:21,494 INFO (DefaultSecurityFilterChain.java:43)- Creating filter chain: Ant [pattern='/js/**'], []
+2022-01-07 01:50:21,494 INFO (DefaultSecurityFilterChain.java:43)- Creating filter chain: Ant [pattern='/index.html'], []
+2022-01-07 01:50:21,494 INFO (DefaultSecurityFilterChain.java:43)- Creating filter chain: Ant [pattern='/favicon.ico'], []
+2022-01-07 01:50:21,494 INFO (DefaultSecurityFilterChain.java:43)- Creating filter chain: Ant [pattern='/doc.html'], []
+2022-01-07 01:50:21,494 INFO (DefaultSecurityFilterChain.java:43)- Creating filter chain: Ant [pattern='/webjars/**'], []
+2022-01-07 01:50:21,494 INFO (DefaultSecurityFilterChain.java:43)- Creating filter chain: Ant [pattern='/swagger-resources/**'], []
+2022-01-07 01:50:21,494 INFO (DefaultSecurityFilterChain.java:43)- Creating filter chain: Ant [pattern='/v2/api-docs/**'], []
+2022-01-07 01:50:21,495 INFO (DefaultSecurityFilterChain.java:43)- Creating filter chain: Ant [pattern='/captcha'], []
+2022-01-07 01:50:21,509 INFO (DefaultSecurityFilterChain.java:43)- Creating filter chain: any request, [org.springframework.security.web.context.request.async.WebAsyncManagerIntegrationFilter@73d7d676, org.springframework.security.web.context.SecurityContextPersistenceFilter@7526bb18, org.springframework.security.web.header.HeaderWriterFilter@402feb85, org.springframework.security.web.authentication.logout.LogoutFilter@6f1163f7, com.hust.server.config.security.component.JwtAuthenticationTokenFilter@f49e81a, org.springframework.security.web.savedrequest.RequestCacheAwareFilter@30bf881e, org.springframework.security.web.servletapi.SecurityContextHolderAwareRequestFilter@24731caf, org.springframework.security.web.authentication.AnonymousAuthenticationFilter@8e3449e, org.springframework.security.web.session.SessionManagementFilter@38af386e, org.springframework.security.web.access.ExceptionTranslationFilter@1382a7d8, org.springframework.security.web.access.intercept.FilterSecurityInterceptor@58b5d5fc]
+2022-01-07 01:50:21,630 INFO (DirectJDKLog.java:173)- Starting ProtocolHandler ["http-nio-8081"]
+2022-01-07 01:50:21,644 INFO (TomcatWebServer.java:220)- Tomcat started on port(s): 8081 (http) with context path ''
+2022-01-07 01:50:21,645 INFO (DocumentationPluginsBootstrapper.java:147)- Context refreshed
+2022-01-07 01:50:21,653 INFO (DocumentationPluginsBootstrapper.java:150)- Found 1 custom documentation plugin(s)
+2022-01-07 01:50:21,678 INFO (ApiListingReferenceScanner.java:41)- Scanning for api listing references
+2022-01-07 01:50:21,857 INFO (StartupInfoLogger.java:61)- Started YebServerApplication in 6.073 seconds (JVM running for 6.737)
+2022-01-07 01:51:09,644 INFO (ExecutorConfigurationSupport.java:218)- Shutting down ExecutorService 'applicationTaskExecutor'

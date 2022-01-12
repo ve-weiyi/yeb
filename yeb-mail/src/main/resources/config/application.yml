@@ -1,0 +1,54 @@
+server:
+  # 端口
+  port: 8082
+
+spring:
+  mail:
+    # 邮件服务器地址
+    host: smtp.qq.com
+    # 协议 默认就是smtp
+    protocol: smtp
+    # 编码格式 默认就是utf-8
+    default-encoding: utf-8
+    # 邮箱 647166282@qq.com
+    username: 647166282@qq.com
+    # 16位授权码 不是邮箱密码
+    password: culyqmzvmppabccd
+    # smtp的指定端口 使用465要将protocol改为smtps
+    port: 587
+    # 设置开启ssl
+    properties:
+      mail:
+        stmp:
+          ssl:
+            enable: true
+
+
+  # rabbitmq 配置
+  rabbitmq:
+    # 用户名
+    username: guest
+    # 密码
+    password: guest
+    # 服务器地址
+    host: 127.0.0.1
+    # 端口号，网页输入为15672，此处必须是5672
+    port: 5672
+    listener:
+      simple:
+        # 手动确认
+        acknowledge-mode: manual
+
+  # Redis配置
+  redis:
+    timeout: 10000ms                        # 连接超时时间
+    host: 127.0.0.1                         # Redis服务器地址
+    password: redis7914                     # 密码，没有配密码可以不配置
+    port: 6379                              # Redis服务器端口
+    database: 0                             # 选择哪个库，默认0库
+    lettuce:
+      pool:
+        max-active: 1024                    # 最大连接数，默认 8
+        max-wait: 10000ms                   # 最大连接阻塞等待时间，单位毫秒，默认 -1
+        max-idle: 200                       # 最大空闲连接，默认 8
+        min-idle: 5                         # 最小空闲连接，默认 0

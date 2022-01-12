@@ -1,0 +1,312 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.hust.server.mapper.EmployeeMapper">
+
+    <!-- 通用查询映射结果 -->
+    <resultMap id="BaseResultMap" type="Employee">
+        <id column="id" property="id"/>
+        <result column="name" property="name"/>
+        <result column="gender" property="gender"/>
+        <result column="birthday" property="birthday"/>
+        <result column="idCard" property="idCard"/>
+        <result column="wedlock" property="wedlock"/>
+        <result column="nationId" property="nationId"/>
+        <result column="nativePlace" property="nativePlace"/>
+        <result column="politicId" property="politicId"/>
+        <result column="email" property="email"/>
+        <result column="phone" property="phone"/>
+        <result column="address" property="address"/>
+        <result column="departmentId" property="departmentId"/>
+        <result column="jobLevelId" property="jobLevelId"/>
+        <result column="posId" property="posId"/>
+        <result column="engageForm" property="engageForm"/>
+        <result column="tiptopDegree" property="tiptopDegree"/>
+        <result column="specialty" property="specialty"/>
+        <result column="school" property="school"/>
+        <result column="beginDate" property="beginDate"/>
+        <result column="workState" property="workState"/>
+        <result column="workID" property="workID"/>
+        <result column="contractTerm" property="contractTerm"/>
+        <result column="conversionTime" property="conversionTime"/>
+        <result column="notWorkDate" property="notWorkDate"/>
+        <result column="beginContract" property="beginContract"/>
+        <result column="endContract" property="endContract"/>
+        <result column="workAge" property="workAge"/>
+        <result column="salaryId" property="salaryId"/>
+    </resultMap>
+
+    <resultMap id="EmployeeInfo" type="com.hust.server.pojo.Employee" extends="BaseResultMap">
+        <association javaType="Nation" property="nation">
+            <id column="nid" property="id"/>
+            <result column="nname" property="name"/>
+        </association>
+        <association javaType="politicsStatus" property="politicsStatus">
+            <id column="pid" property="id"/>
+            <result column="pname" property="name"/>
+        </association>
+        <association javaType="department" property="department">
+            <id column="did" property="id"/>
+            <result column="dname" property="name"/>
+        </association>
+        <association javaType="joblevel" property="joblevel">
+            <id column="jid" property="id"/>
+            <result column="jname" property="name"/>
+        </association>
+        <association javaType="com.hust.server.pojo.Position" property="position">
+            <id column="ptid" property="id"/>
+            <result column="ptname" property="name"/>
+        </association>
+
+    </resultMap>
+
+    <!-- 通用查询结果列 -->
+    <sql id="Base_Column_List">
+        id
+        , name, gender, birthday, idCard, wedlock, nationId,
+        nativePlace, politicId, email, phone, address, departmentId,
+        jobLevelId, posId, engageForm, tiptopDegree, specialty,
+        school, beginDate, workState, workID, contractTerm, conversionTime,
+        notWorkDate, beginContract, endContract, workAge, salaryId
+    </sql>
+
+    <update id="updateEmpEsid" parameterType="integer">
+        UPDATE t_employee e
+        SET e.salaryId = #{eSid}
+        WHERE e.id = #{eid}
+    </update>
+
+    <!--分页获取所有员工-->
+    <select id="getEmployeePage" resultMap="EmployeeInfo">
+        select
+        e.*,
+        n.id nid,
+        n.`name` nname,
+        p.id pid,
+        p.`name` pname,
+        d.id did,
+        d.`name` dname,
+        j.id jid,
+        j.`name` jname,
+        pt.id ptid,
+        pt.`name` ptname
+        from
+        t_employee e,
+        t_nation n,
+        t_politics_status p,
+        t_department d,
+        t_joblevel j,
+        t_position pt
+        <where>
+            e.nationId = n.id
+            and e.politicId = p.id
+            and e.departmentId = d.id
+            and e.jobLevelId = j.id
+            and e.posId = pt.id
+            <if test="employee.name != null and employee.name != ''">
+                and e.`name` LIKE CONCAT('%',#{employee.name},'%')
+            </if>
+            <if test="employee.politicId != null and employee.politicId > 0">
+                and e.politicId = #{employee.politicId}
+            </if>
+            <if test="employee.nationId != null and employee.nationId > 0">
+                and e.nationId = #{employee.nationId}
+            </if>
+            <if test="employee.jobLevelId != null and employee.jobLevelId > 0">
+                and e.jobLevelId = #{employee.jobLevelId}
+            </if>
+            <if test="employee.posId != null and employee.posId > 0">
+                and e.posId = #{employee.posId}
+            </if>
+            <if test="employee.engageForm != null and employee.engageForm > 0">
+                and e.engageForm = #{employee.engageForm}
+            </if>
+            <if test="startDate != null and startDate != ''
+                          and endDate != null and endDate != ''">
+                and e.beginDate BETWEEN #{startDate} and #{endDate}
+            </if>
+            order by e.id
+        </where>
+    </select>
+
+    <!--查询员工-->
+    <select id="getEmployee" resultMap="EmployeeInfo">
+        SELECT
+        e.*,
+        n.id As nid,
+        n.`name` AS nname,
+        p.id AS pid,
+        p.`name` AS pname,
+        d.id AS did,
+        d.`name` AS dname,
+        j.id AS jid,
+        j.`name` AS jname,
+        pos.id AS posid,
+        pos.`name` AS posname
+        FROM
+        t_employee e,
+        t_nation n,
+        t_politics_status p,
+        t_department d,
+        t_joblevel j,
+        t_position pos
+        WHERE
+        e.nationId = n.id
+        AND e.politicId = p.id
+        AND e.departmentId = d.id
+        AND e.jobLevelId = j.id
+        AND e.posId = pos.id
+        <if test="null!=id">
+            AND e.id = #{id}
+        </if>
+        ORDER BY e.id
+    </select>
+
+    <!--获取员工最大编号-->
+    <select id="getMaxWorkID" resultType="string">
+        SELECT max(workID)
+        FROM t_employee;
+    </select>
+
+    <!--导出员工表格-->
+    <select id="getEmployeeList" parameterType="integer" resultMap="EmployeeInfo">
+        SELECT
+        e.*,
+        n.id nid,
+        n.`name` nname,
+        p.id pid,
+        p.`name` pname,
+        d.id did,
+        d.`name` dname,
+        j.id jid,
+        j.`name` jname,
+        pt.id ptid,
+        pt.`name` ptname
+        FROM
+        t_employee e,
+        t_nation n,
+        t_politics_status p,
+        t_department d,
+        t_joblevel j,
+        t_position pt
+        WHERE
+        e.nationId = n.id
+        AND e.politicId = p.id
+        AND e.departmentId = d.id
+        AND e.jobLevelId = j.id
+        AND e.posId = pt.id
+        <if test="id != null and id > 0">
+            AND e.id = #{id}
+        </if>
+        ORDER BY
+        e.id
+    </select>
+
+    <!--查询一些列添加需要的ID-->
+    <select id="getIdSelectNationByName" parameterType="Map" resultMap="EmployeeInfo">
+        SELECT n.id  nid,
+               p.id  pid,
+               d.id  did,
+               j.id  jid,
+               pt.id ptid
+        FROM t_nation n,
+             t_politics_status p,
+             t_department d,
+             t_joblevel j,
+             t_position pt
+        WHERE n.`name` = #{nationName}
+          AND p.`name` = #{politicsStatusName}
+          AND d.`name` = #{departmentName}
+          AND j.`name` = #{joblevelName}
+          AND pt.`name` = #{positionName}
+    </select>
+
+    <resultMap id="salaryColumnList" type="com.hust.server.pojo.Employee" extends="EmployeeInfo">
+        <!-- property 这个是 Employee 中的字段变量，javaType 里面是该字段具体的对象类型-->
+        <association property="s" javaType="Salary">
+            <!--column sql语句查出来的字段，property 是 association 解析对象 salary 的字段-->
+            <id column="sid" property="id"/>
+            <result column="sbasicSalary" property="basicSalary"/>
+            <result column="sbonus" property="bonus"/>
+            <result column="lunchSalary" property="lunchSalary"/>
+            <result column="strafficSalary" property="trafficSalary"/>
+            <result column="sallSalary" property="allSalary"/>
+            <result column="spensionBase" property="pensionBase"/>
+            <result column="spensionPer" property="pensionPer"/>
+            <result column="screateDate" property="createDate"/>
+            <result column="smedicalBase" property="medicalBase"/>
+            <result column="smedicalPer" property="medicalPer"/>
+            <result column="saccumulationFundBase" property="accumulationFundBase"/>
+            <result column="saccumulationFundPer" property="accumulationFundPer"/>
+            <result column="sname" property="name"/>
+        </association>
+    </resultMap>
+    <!--获取所有员工和员工账套信息-->
+    <select id="getAllEmpSalary" resultMap="salaryColumnList">
+        SELECT e.*,
+               s.id                   sid,
+               s.basicSalary          sbasicSalary,
+               s.bonus                sbonus,
+               s.lunchSalary          lunchSalary,
+               s.trafficSalary        strafficSalary,
+               s.allSalary            sallSalary,
+               s.pensionBase          spensionBase,
+               s.pensionPer           spensionPer,
+               s.createDate           screateDate,
+               s.medicalBase          smedicalBase,
+               s.medicalPer           smedicalPer,
+               s.accumulationFundBase saccumulationFundBase,
+               s.accumulationFundPer  saccumulationFundPer,
+               s.`name`               sname
+        FROM t_employee e,
+             t_salary s
+        WHERE e.salaryId = s.id
+        ORDER BY e.id
+    </select>
+
+    <resultMap id="EmployeeWithSalary" type="com.hust.server.pojo.Employee"
+               extends="BaseResultMap">
+        <association property="salary" javaType="com.hust.server.pojo.Salary">
+            <id column="sid" property="id"/>
+            <result column="sbasicSalary" property="basicSalary"/>
+            <result column="sbonus" property="bonus"/>
+            <result column="slunchSalary" property="lunchSalary"/>
+            <result column="strafficSalary" property="trafficSalary"/>
+            <result column="sallSalary" property="allSalary"/>
+            <result column="spensionBase" property="pensionBase"/>
+            <result column="spensionPer" property="pensionPer"/>
+            <result column="smedicalBase" property="medicalBase"/>
+            <result column="smedicalPer" property="medicalPer"/>
+            <result column="saccumulationFundBase"
+                    property="accumulationFundBase"/>
+            <result column="saccumulationFundPer"
+                    property="accumulationFundPer"/>
+            <result column="sname" property="name"/>
+        </association>
+        <association property="department"
+                     javaType="com.hust.server.pojo.Department">
+            <result column="dname" property="name"/>
+        </association>
+    </resultMap>
+    <!--获取所有员工账套-->
+    <select id="getEmployeeWithSalary" resultMap="EmployeeWithSalary">
+        SELECT e.*,
+               d.`name`               AS dname,
+               s.id                   AS sid,
+               s.`name`               AS sname,
+               s.basicSalary          AS sbasicSalary,
+               s.trafficSalary        AS strafficSalary,
+               s.lunchSalary          AS slunchSalary,
+               s.bonus                AS sbonus,
+               s.allSalary            AS sallSalary,
+               s.pensionPer           AS spensionPer,
+               s.pensionBase          AS spensionBase,
+               s.medicalPer           AS smedicalPer,
+               s.medicalBase          AS smedicalBase,
+               s.accumulationFundPer  AS saccumulationFundPer,
+               s.accumulationFundBase AS saccumulationFundBase
+        FROM t_employee AS e
+                 LEFT JOIN t_salary AS s ON e.salaryId = s.id
+                 LEFT JOIN t_department AS d ON e.departmentId = d.id
+        ORDER BY e.id
+    </select>
+</mapper>
