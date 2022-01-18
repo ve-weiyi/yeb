@@ -13,15 +13,6 @@ import org.slf4j.LoggerFactory;
 public class LogUtil {
 
    // private final static Logger log = LoggerFactory.getLogger(LogUtil.class);
-    public static final int VERBOSE = 1;
-    public static final int DEBUG = 2;
-    public static final int INFO = 3;
-    public static final int WARN = 4;
-    public static final int ERROR = 5;
-    public static final int NOTHING = 6;
-    
-    public static int level = 2;
-    
 
     private static int MAX_INFO_LENGTH=1000;
 

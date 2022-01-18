@@ -9,6 +9,7 @@
         <sourceTestOutputDir name="target/generated-test-sources/test-annotations" />
         <outputRelativeToContentRoot value="true" />
         <module name="yeb-generator" />
+        <module name="yeb-mail" />
         <module name="yeb-server" />
         <module name="locker-mail" />
       </profile>
@@ -19,6 +20,7 @@
       <module name="locker-mail" options="-parameters" />
       <module name="veb" options="-parameters" />
       <module name="yeb-generator" options="-parameters" />
+      <module name="yeb-mail" options="-parameters" />
       <module name="yeb-server" options="-parameters" />
     </option>
   </component>

@@ -101,7 +101,14 @@
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-amqp</artifactId>
         </dependency>
-
+        <!--        FastDFS依赖 用来更新头像，这个包maven中没有，需要自己去网上找1.29的-->
+        <dependency>
+            <groupId>org.csource</groupId>
+            <artifactId>fastdfs-client-java</artifactId>
+            <version>1.29-SNAPSHOT</version>
+            <scope>system</scope>
+            <systemPath>${project.basedir}/../libs/fastdfs-client-java-1.29-SNAPSHOT.jar</systemPath>
+        </dependency>
         <!--FastDFS依赖 用来更新头像，这个包maven中没有，需要自己去网上找1.29的-->
 <!--        <dependency>-->
 <!--            <groupId>org.csource</groupId>-->
@@ -151,5 +158,13 @@
             <version>1.1.1</version>
         </dependency>
     </dependencies>
-
+    <!--打包-->
+    <build>
+        <plugins>
+            <plugin>
+                <groupId>org.springframework.boot</groupId>
+                <artifactId>spring-boot-maven-plugin</artifactId>
+            </plugin>
+        </plugins>
+    </build>
 </project>

@@ -44,19 +44,19 @@ public class AdminInfoController {
     }
 
 
-    @ApiOperation(value = "更新用户密码")
-    @PutMapping("/admin-pass")
-    public RespBean updateAdminPassWord(@RequestBody Map<String,Object> info){
-        //旧密码
-        String oldPass = (String) info.get("oldPass");
-        //新密码
-        String pass = (String) info.get("pass");
-        //当前登录用户ID
-        Integer adminId = (Integer) info.get("adminId");
-        return iAdminService.updateAdminPassWord(oldPass,pass,adminId);
-    }
+//    @ApiOperation(value = "更新用户密码")
+//    @PutMapping("/admin-pass")
+//    public RespBean updateAdminPassWord(@RequestBody Map<String,Object> info){
+//        //旧密码
+//        String oldPass = (String) info.get("oldPass");
+//        //新密码
+//        String pass = (String) info.get("pass");
+//        //当前登录用户ID
+//        Integer adminId = (Integer) info.get("adminId");
+//        return iAdminService.updateAdminPassWord(oldPass,pass,adminId);
+//    }
 
-    @ApiOperation(value = "更新用户密码s")
+    @ApiOperation(value = "更新用户密码")
     @PutMapping("/admin-password")
     public RespBean updatePassWord(String oldPass, String pass, Integer adminId){
         return iAdminService.updateAdminPassWord(oldPass,pass,adminId);
